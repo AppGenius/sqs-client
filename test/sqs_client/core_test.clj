@@ -1,6 +1,7 @@
-(ns cemerick.bandalore-test
-  (:use cemerick.bandalore
-    clojure.test)
+(ns sqs-client.core-test
+  (:use sqs-client.core
+        clojure.test)
+  (:require [sqs-client.util :as util])
   (:refer-clojure :exclude (send)))
 
 ; kill the verbose aws logging
@@ -8,9 +9,10 @@
   java.util.logging.Level/WARNING)
 
 (def client
-  (let [id (System/getProperty "aws.id")
-        secret-key (System/getProperty "aws.secret-key")]
-    (assert (and id secret-key))
+  (let [id (util/getenv "AG_AWS_ID")
+        secret-key (util/getenv "AG_AWS_KEY")]
+    (assert (and (not (empty? id))
+                 (not (empty? secret-key))))
     (create-client id secret-key)))
 
 (def ^{:dynamic true} *test-queue-url* nil)

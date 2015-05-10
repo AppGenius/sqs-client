@@ -6,7 +6,8 @@
 ;   the terms of this license.
 ;   You must not remove this notice, or any other, from this software.
 
-(ns cemerick.bandalore
+(ns sqs-client.core
+  (:require [sqs-client.util :as util])
   (:import com.amazonaws.services.sqs.AmazonSQSClient
     (com.amazonaws.services.sqs.model
       AddPermissionRequest ChangeMessageVisibilityRequest CreateQueueRequest
@@ -20,15 +21,14 @@
   "Creates a synchronous AmazonSQSClient using the provided account id, secret key,
    and optional com.amazonaws.ClientConfiguration."
   ([]
-    (create-client (com.amazonaws.ClientConfiguration.)))
+    (create-client (util/getenv "AG_AWS_ID") (util/getenv "AG_AWS_KEY") (com.amazonaws.ClientConfiguration.)))
   ([client-config]
-    (AmazonSQSClient.
-      (.withUserAgent client-config "Bandalore - SQS for Clojure")))
+    (create-client (util/getenv "AG_AWS_ID") (util/getenv "AG_AWS_KEY") client-config))
   ([id secret-key]
     (create-client id secret-key (com.amazonaws.ClientConfiguration.)))
   ([id secret-key client-config]
     (AmazonSQSClient. (com.amazonaws.auth.BasicAWSCredentials. id secret-key)
-      (.withUserAgent client-config "Bandalore - SQS for Clojure"))))
+      (.withUserAgent client-config "SQS for Clojure"))))
 
 (def ^{:private true} visibility-warned? (atom false))
 

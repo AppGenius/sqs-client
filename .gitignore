@@ -12,3 +12,6 @@
 
 target
 classes
+
+.lein-repl-history
+.lein-failures
