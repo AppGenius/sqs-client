@@ -9,7 +9,9 @@
                               :username :env
                               :passphrase :env}]]
   :dependencies [[org.clojure/clojure "1.6.0"]
+                 [com.taoensso/carmine "2.10.0"]
                  [cheshire "5.2.0"]
+                 [clj-time "0.9.0"]
                  [com.amazonaws/aws-java-sdk "1.6.10"]]
   :plugins [[s3-wagon-private "1.1.2"]]
   :main sqs-client.core

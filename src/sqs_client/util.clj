@@ -1,4 +1,6 @@
-(ns sqs-client.util)
+(ns sqs-client.util
+  (:require [clj-time.core :as time]
+            [clj-time.coerce :as coerce]))
 
 
 (defn getenv

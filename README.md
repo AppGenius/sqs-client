@@ -27,8 +27,8 @@ using SQS
 
 ## License
 
-Copyright © 2011-2013 Chas Emerick and contributors.
+Copyright © 2015 AppGenius
 
-Licensed under the EPL. (See the file epl-v10.html.)
-
+``sqs-client.sqs`` Copyright © 2011-2013 Chas Emerick and contributors.  
+Licensed under the EPL. (See the file epl-v10.html)  
 Adapted 2015 Ben Slawski & AppGenius
