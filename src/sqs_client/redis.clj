@@ -1,4 +1,5 @@
 (ns sqs-client.redis
+  (:import [java.net URI])
   (:require [sqs-client.util :as util]
             [cheshire.core :as json]
             [taoensso.carmine :as car]))
@@ -9,7 +10,17 @@
   (let [cache-url (util/getenv "RESPONSE_CACHE_URL")]
     (if (empty? cache-url)
       {:pool {} :spec {:host "127.0.0.1" :port 6379}}
-      {:pool {} :spec {:uri cache-url}})))
+      (let [cache-uri (URI. cache-url)
+            port (.getPort cache-uri)
+            host (.getHost cache-uri)
+            password (when-let [user-info (.getUserInfo cache-uri)]
+                       (second (clojure.string/split user-info #":")))
+            db (when-let [path (.getPath cache-uri)]
+                 (when-let [db-str (second (clojure.string/split path #"/"))]
+                   (Integer. db-str)))
+            spec (into {}
+                   (filter val { :host host :port port }))]
+        {:pool {} :spec spec}))))
 
 (defmacro wcar*
   "executes the given body using the preset cache-connection"
