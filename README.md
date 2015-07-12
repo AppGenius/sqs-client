@@ -8,7 +8,7 @@ and provides a Clojure-idiomatic API for the SQS-related functionality therein.
 
 project.clj
 ```
-[sqs-client "0.0.0"]
+[sqs-client "0.0.2"]
 ```
 
 compatible with Clojure 1.2.0+.
