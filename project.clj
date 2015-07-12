@@ -1,4 +1,4 @@
-(defproject sqs-client "0.0.2-SNAPSHOT"
+(defproject sqs-client "0.0.2"
   :description "tools for interfaceing with the AWS simple queue service"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
